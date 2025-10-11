@@ -9,3 +9,5 @@ elif "n":
 
 for words in file:
     print (words)
+
+    #adding more files to the list
