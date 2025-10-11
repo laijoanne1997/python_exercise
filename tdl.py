@@ -4,10 +4,13 @@ to_do_list=input("Would you like me to open your to-do list? (y/n) ").lowercase
 if to_do_list == "y":
     file_name = input("What is your file name? ")
     file = open(file_name)
+    print(f"Your file, {file_name}, has successfully opened.")
 elif "n":
     quit()
 
-for words in file:
-    print (words)
+    print("Here are the list of item's on your to-do list: ")
+for item in file:
+    print(item)
 
-    #adding more files to the list
+
+
