@@ -1,9 +1,10 @@
 #creating a to-do list that can be updated and completed in python
+#need to consider fi they are making a new to-do list or updating an old one.
 to_do_list=input("Would you like me to open your to-do list? (y/n) ").lowercase
 
 if to_do_list == "y":
     file_name = input("What is your file name? ")
-    file = open(file_name)
+    file = open(file_name, "a")
     print(f"Your file, {file_name}, has successfully opened.")
 elif "n":
     quit()
@@ -18,6 +19,5 @@ update=input("Do you want to update your to-do list? (y/n)").lowercase
 if update =="y":
     add_more=input("Did you want to add more (add) or complete (tick): ").lowercase.rstrip()
     if add_more == "add":
-
-
-
+        add = input("What else would you like to add: ")
+        file.write(add)
