@@ -1,5 +1,8 @@
 #creating a to-do list that can be updated and completed in python
 #need to consider fi they are making a new to-do list or updating an old one.
+def strike(text):
+    return ''.join([c + '\u0336' for c in text])
+
 to_do_list=input("Would you like me to open your to-do list? (y/n) ").lowercase
 
 if to_do_list == "y":
@@ -19,5 +22,17 @@ update=input("Do you want to update your to-do list? (y/n)").lowercase
 if update =="y":
     add_more=input("Did you want to add more (add) or complete (tick): ").lowercase.rstrip()
     if add_more == "add":
-        add = input("What else would you like to add: ")
+        add = input("What else would you like to add. If you're finished, write 'done'.").lowercase()
         file.write(add)
+        continue
+    elif add_more == "tick":
+        for item in file:
+            print(item)
+            completed="Is this task completed? (y/n)".lowercase()
+            if completed == "y":
+                file.write(strike(item))
+            if complete == "n":
+                continue
+
+print("done")
+
