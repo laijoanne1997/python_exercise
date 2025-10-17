@@ -29,13 +29,13 @@ if update =="y":
             with open(file_name, "a") as afile:
                 afile.write(add)
                 continue
-    elif add_more == "tick":
+    if add_more == "tick":
         for item in file:
             print(item)
             completed="Is this task completed? (y/n)".lowercase()
             if completed == "y":
-                afile.write(strike(item))
-            if complete == "n":
+                afile.write(f"\n{strike(item)}")
+            elif complete == "n":
                 continue
 
 print("done")
