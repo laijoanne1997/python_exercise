@@ -1,42 +1,51 @@
-#creating a to-do list that can be updated and completed in python
-#need to consider fi they are making a new to-do list or updating an old one.
 def strike(text):
     return ''.join([c + '\u0336' for c in text])
 
-to_do_list=input("Would you like me to open your to-do list? (y/n) ").lower()
+to_do_list = input("Would you like to open your to-do list? (y/n): ").lower()
 
 if to_do_list == "y":
     file_name = input("What is your file name? ")
-    file = open(file_name, "r")
-    print(f"Your file, {file_name}, has successfully opened.")
-elif "n":
+    try:
+        with open(file_name, "r") as file:
+            tasks = [line.strip() for line in file.readlines()]
+        print(f"\nYour file '{file_name}' has successfully opened.")
+    except FileNotFoundError:
+        print("File not found. Starting a new to-do list instead.")
+        tasks = []
+elif to_do_list == "n":
+    file_name = input("Enter a name for your new to-do list file (e.g. todo.txt): ")
+    tasks = []
+else:
+    print("Invalid choice.")
     quit()
 
-print("\nHere are the list of item's on your to-do list:")
+print("\nHere are the items on your to-do list:")
+if tasks:
+    for i, item in enumerate(tasks, 1):
+        print(f"{i}. {item}")
+else:
+    print("Your to-do list is empty!")
 
-for item in file:
-    print(item)
+update = input("\nDo you want to update your to-do list? (y/n): ").lower()
 
-update=input("Do you want to update your to-do list? (y/n)").lower()
+if update == "y":
+    action = input("Would you like to add more (add) or complete (tick)? ").lower().strip()
 
-if update =="y":
-    add_more=input("Did you want to add more (add) or complete (tick): ").lower().rstrip()
-    while add_more == "add":
-        add = input("What else would you like to add. If you're finished, write 'done'.").lower()
-        if add == "done":
-            break
-        else:
-            with open(file_name, "a") as afile:
-                afile.write(add)
-                continue
-    if add_more == "tick":
-        for item in file:
-            print(item)
-            completed="Is this task completed? (y/n)".lowercase()
+    if action == "add":
+        while True:
+            add = input("What would you like to add? (type 'done' when finished): ").strip()
+            if add == "done":
+                break
+            tasks.append(add)
+
+    elif action == "tick":
+        for i, item in enumerate(tasks):
+            completed = input(f"Is this task completed? '{item}' (y/n): ").lower()
             if completed == "y":
-                afile.write(f"\n{strike(item)}")
-            elif complete == "n":
-                continue
+                tasks[i] = strike(item)
 
-print("done")
+    with open(file_name, "w") as file:
+        for task in tasks:
+            file.write(task + "\n")
 
+print("\n✅ Done! Your to-do list has been updated.")
