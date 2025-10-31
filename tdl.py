@@ -48,4 +48,4 @@ if update == "y":
         for task in tasks:
             file.write(task + "\n")
 
-print("\n✅ Done! Your to-do list has been updated.")
+print("\n Done! Your to-do list has been updated.")
